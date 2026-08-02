@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1200" height="720" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#0b0b0c"/>
+  <text x="60" y="56" fill="#8A42FF" font-family="Arial" font-weight="700" font-size="20">Dashboard (Wireframe)</text>
+
+  <!-- Left nav -->
+  <rect x="40" y="100" width="220" height="520" rx="12" fill="#121214" stroke="#1c1c1d"/>
+  <text x="70" y="140" fill="#9a9aa3">Overview</text>
+  <text x="70" y="180" fill="#9a9aa3">Meine Produkte</text>
+  <text x="70" y="220" fill="#9a9aa3">Meine Lizenzen</text>
+  <text x="70" y="260" fill="#9a9aa3">Downloads</text>
+  <text x="70" y="300" fill="#9a9aa3">Account</text>
+
+  <!-- Main area -->
+  <rect x="280" y="100" width="880" height="160" rx="12" fill="#121214" stroke="#1c1c1d"/>
+  <text x="300" y="140" fill="#fff">Willkommen, Optix HANS</text>
+  <rect x="280" y="280" width="420" height="160" rx="12" fill="#121214" stroke="#1c1c1d"/>
+  <text x="300" y="320" fill="#8A42FF">Meine Produkte</text>
+  <rect x="720" y="280" width="440" height="160" rx="12" fill="#121214" stroke="#1c1c1d"/>
+  <text x="740" y="320" fill="#8A42FF">Meine Lizenzen</text>
+</svg>
