@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Optix Tweaks — Die nächste Generation von Performance Tweaks</title>
+  <meta name="description" content="Mehr FPS. Weniger Input Lag. Maximale Performance. Optix Tweaks bietet optimierte Tweaks für Gaming und Windows." />
+  <meta property="og:title" content="Optix Tweaks" />
+  <meta property="og:description" content="Die nächste Generation von Performance Tweaks — Mehr FPS. Weniger Input Lag. Maximale Performance." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href="/assets/favicon.svg">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">Optix Tweaks</div>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <a href="/">Home</a>
+        <a href="/products/">Produkte</a>
+        <a href="/downloads/">Downloads</a>
+        <a href="/faq/">FAQ</a>
+        <a href="#" id="discord-btn">Discord</a>
+        <a href="/support/">Support</a>
+        <a href="/login/" class="btn btn-outline">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg" id="hero-bg"></div>
+      <div class="container hero-content">
+        <h1>Die nächste Generation von Performance Tweaks</h1>
+        <p class="subtitle">Mehr FPS. Weniger Input Lag. Maximale Performance.</p>
+        <div class="hero-cta">
+          <a href="/products/" class="btn btn-primary">Produkte ansehen</a>
+          <a href="#buy" class="btn btn-ghost">Jetzt kaufen</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="products-preview container">
+      <h2>Beliebte Produkte</h2>
+      <div class="product-grid" id="product-grid">
+        <!-- Produktkarten werden per JS aus Seed-Daten befüllt -->
+      </div>
+    </section>
+
+    <section class="info container">
+      <h2>Warum Optix Tweaks?</h2>
+      <p>Optimierungen für maximale FPS, reduzierte Eingabeverzögerung und stabile Performance. Entwickelt für Gamer und Performance-Enthusiasten.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Optix Tweaks</div>
+      <nav class="footer-nav">
+        <a href="/discord/">Discord</a>
+        <a href="https://github.com/OptixTweak/OptixTweak.github.io">GitHub</a>
+        <a href="/privacy/">Datenschutz</a>
+        <a href="/impressum/">Impressum</a>
+        <a href="/support/">Support</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/js/seed.js" defer></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
