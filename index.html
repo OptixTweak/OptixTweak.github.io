@@ -8,13 +8,16 @@
   <meta property="og:title" content="Optix Tweaks" />
   <meta property="og:description" content="Die nächste Generation von Performance Tweaks — Mehr FPS. Weniger Input Lag. Maximale Performance." />
   <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="/css/variables.css">
   <link rel="stylesheet" href="/css/styles.css">
-  <link rel="icon" href="/assets/favicon.svg">
+  <link rel="icon" href="/assets/logo/favicon.svg">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <div class="container header-inner">
-      <div class="logo">Optix Tweaks</div>
+      <a href="/" class="logo-link" aria-label="Optix Tweaks Home">
+        <img src="/assets/logo/logo-full.svg" alt="Optix Tweaks" class="logo-img">
+      </a>
       <nav class="main-nav" aria-label="Hauptnavigation">
         <a href="/">Home</a>
         <a href="/products/">Produkte</a>
@@ -24,14 +27,15 @@
         <a href="/support/">Support</a>
         <a href="/login/" class="btn btn-outline">Login</a>
       </nav>
+      <button class="nav-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Menü">☰</button>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-bg" id="hero-bg"></div>
+    <section class="hero" id="hero">
+      <div class="hero-canvas" id="hero-canvas" aria-hidden="true"></div>
       <div class="container hero-content">
-        <h1>Die nächste Generation von Performance Tweaks</h1>
+        <h1 class="hero-title">Die nächste Generation von Performance Tweaks</h1>
         <p class="subtitle">Mehr FPS. Weniger Input Lag. Maximale Performance.</p>
         <div class="hero-cta">
           <a href="/products/" class="btn btn-primary">Produkte ansehen</a>
@@ -53,10 +57,10 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo">
     <div class="container footer-inner">
       <div>© <span id="year"></span> Optix Tweaks</div>
-      <nav class="footer-nav">
+      <nav class="footer-nav" aria-label="Footer Navigation">
         <a href="/discord/">Discord</a>
         <a href="https://github.com/OptixTweak/OptixTweak.github.io">GitHub</a>
         <a href="/privacy/">Datenschutz</a>
@@ -67,8 +71,20 @@
   </footer>
 
   <script src="/js/seed.js" defer></script>
+  <script src="/js/hero.js" defer></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // simple nav toggle for mobile
+    (function(){
+      const btn = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('.main-nav');
+      btn.addEventListener('click', ()=>{
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        nav.classList.toggle('open');
+      });
+    })();
   </script>
 </body>
 </html>
