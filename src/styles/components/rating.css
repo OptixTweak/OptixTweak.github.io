@@ -1,6 +1,0 @@
-/* Rating stars */
-@import '../_variables.css';
-
-.rating{ display:inline-flex; gap:4px; align-items:center; }
-.rating .star{ width:16px; height:16px; color:#ffd166; display:inline-block; }
-.rating[aria-hidden="false"] .star{ filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }

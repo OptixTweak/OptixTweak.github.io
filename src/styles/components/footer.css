@@ -1,6 +1,0 @@
-/* Footer styles */
-@import '../_variables.css';
-
-.site-footer{ margin-top:48px; padding-top:28px; border-top:1px solid rgba(255,255,255,0.03); color:var(--color-muted-text); }
-.site-footer .cols{ display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; }
-.site-footer a{ color:var(--color-muted-text); text-decoration:none }

@@ -1,9 +1,0 @@
-/* Table styles */
-@import '../_variables.css';
-
-.table{ width:100%; border-collapse:collapse; font-size:0.95rem; }
-.table th, .table td{ padding:12px 10px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.03); }
-.table tr:nth-child(even){ background: rgba(255,255,255,0.01); }
-.table th{ color:var(--color-muted-text); font-weight:600; }
-
-.table-responsive{ overflow:auto; }
