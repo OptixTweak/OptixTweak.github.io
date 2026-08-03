@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Checkout — OptixTweak Demo</title>
+  <link rel="stylesheet" href="/src/styles/_variables.css">
+  <link rel="stylesheet" href="/src/styles/components/card.css">
+  <link rel="stylesheet" href="/src/styles/components/buttons.css">
+  <style>
+    .summary{ display:flex; flex-direction:column; gap:12px }
+    .row{ display:flex; justify-content:space-between; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Checkout</h1>
+    <div id="summary" class="summary">Lade Warenkorb …</div>
+    <div style="margin-top:12px">
+      <button id="pay-sim" class="btn-primary">Simulate Payment (Demo)</button>
+      <button id="pay-stripe" class="btn-secondary" style="margin-left:8px">Pay with Stripe (Test)</button>
+    </div>
+    <p style="margin-top:18px"><a href="cart.html">Zurück zum Warenkorb</a></p>
+  </main>
+
+  <script src="https://js.stripe.com/v3/" defer></script>
+  <script src="/src/js/checkout.js" defer></script>
+</body>
+</html>
