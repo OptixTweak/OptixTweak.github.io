@@ -1,0 +1,32 @@
+/* Buttons component styles */
+@import '../_variables.css';
+
+.btn-primary{
+  background: linear-gradient(180deg,var(--color-accent),var(--color-accent-600));
+  color:#fff;
+  padding:10px 16px;
+  border-radius:12px;
+  border: none;
+  box-shadow: 0 8px 24px rgba(138,92,255,0.12);
+  transition: transform var(--motion-medium), box-shadow var(--motion-medium), opacity var(--motion-fast);
+}
+.btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 14px 36px rgba(138,92,255,0.18); }
+
+.btn-secondary{
+  background: transparent;
+  color:var(--color-text);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:8px 14px;
+  border-radius:10px;
+}
+
+.btn-ghost{
+  background: none; color:var(--color-muted-text); border:none; padding:6px 10px;
+}
+
+.btn-sm{ padding:6px 10px; font-size:0.875rem; }
+.btn-lg{ padding:14px 20px; font-size:1.1rem; }
+
+.btn-icon{ display:inline-flex; align-items:center; gap:8px; }
+
+.btn[disabled]{ opacity:0.45; cursor:not-allowed; transform:none; box-shadow:none; }

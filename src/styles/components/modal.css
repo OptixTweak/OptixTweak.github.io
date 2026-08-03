@@ -1,0 +1,12 @@
+/* Modal component styles */
+@import '../_variables.css';
+
+.modal-backdrop{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(2,2,2,0.6); z-index:var(--z-top); }
+.modal{ width:clamp(320px, 60%, 900px); border-radius:14px; padding:24px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015)); border:1px solid var(--glass-border); backdrop-filter: blur(var(--glass-blur)); }
+
+.modal .modal-header{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.modal .modal-body{ margin-top:12px; }
+.modal .modal-footer{ display:flex; gap:8px; justify-content:flex-end; margin-top:18px; }
+
+/* Accessibility helper: visually-hidden */
+.visually-hidden{ position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap; }

@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>OptixTweak — Design Demo</title>
   <link rel="stylesheet" href="/src/styles/_variables.css">
+  <link rel="stylesheet" href="/src/styles/components/buttons.css">
+  <link rel="stylesheet" href="/src/styles/components/card.css">
+  <link rel="stylesheet" href="/src/styles/components/modal.css">
+  <link rel="stylesheet" href="/src/styles/components/forms.css">
+  <link rel="stylesheet" href="/src/styles/components/header.css">
+  <link rel="stylesheet" href="/src/styles/components/footer.css">
+  <link rel="stylesheet" href="/src/styles/components/table.css">
+  <link rel="stylesheet" href="/src/styles/components/rating.css">
   <style>
     body{ background: var(--color-bg); color:var(--color-text); font-family:var(--font-sans); margin:0; }
     .container{ max-width:1200px; margin:0 auto; padding:32px; }
@@ -36,14 +44,16 @@
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="logo">OptixTweak</div>
-      <nav class="nav">
+    <header class="header">
+      <div class="brand"><span class="logo">OptixTweak</span></div>
+      <nav class="site-nav nav">
         <a href="#">Produkte</a>
         <a href="#">FAQ</a>
         <a href="#">Dashboard</a>
-        <button class="btn">Login</button>
       </nav>
+      <div class="actions">
+        <button class="btn-primary">Login</button>
+      </div>
     </header>
 
     <section class="hero card" id="hero">
@@ -61,60 +71,61 @@
       <div class="grid" id="products">
         <!-- 6 cards -->
         <div class="card product-card">
-          <img src="/assets/images/placeholder.svg" alt="Placeholder">
-          <div class="meta"><strong>Optix Pack A</strong><span class="badge">Neu</span></div>
+          <div class="thumb"><img src="/assets/images/placeholder.svg" alt="Placeholder"></div>
+          <div class="meta"><div class="title">Optix Pack A</div><span class="badge">Neu</span></div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-            <div style="color:var(--color-muted-text)">€9.99</div>
-            <button class="btn" data-product="A">Kaufen</button>
+            <div class="price">€9.99</div>
+            <div class="quick-actions"><button class="btn-primary btn-sm" data-product="A">Kaufen</button></div>
           </div>
         </div>
         <div class="card product-card">
-          <img src="/assets/images/placeholder.svg" alt="Placeholder">
-          <div class="meta"><strong>Optix Pack B</strong><span class="badge">Sale</span></div>
+          <div class="thumb"><img src="/assets/images/placeholder.svg" alt="Placeholder"></div>
+          <div class="meta"><div class="title">Optix Pack B</div><span class="badge">Sale</span></div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-            <div style="color:var(--color-muted-text)">€4.99</div>
-            <button class="btn" data-product="B">Kaufen</button>
+            <div class="price">€4.99</div>
+            <div class="quick-actions"><button class="btn-primary btn-sm" data-product="B">Kaufen</button></div>
           </div>
         </div>
         <div class="card product-card">
-          <img src="/assets/images/placeholder.svg" alt="Placeholder">
-          <div class="meta"><strong>Optix Pack C</strong><span class="badge">Top</span></div>
+          <div class="thumb"><img src="/assets/images/placeholder.svg" alt="Placeholder"></div>
+          <div class="meta"><div class="title">Optix Pack C</div><span class="badge">Top</span></div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-            <div style="color:var(--color-muted-text)">€14.99</div>
-            <button class="btn" data-product="C">Kaufen</button>
+            <div class="price">€14.99</div>
+            <div class="quick-actions"><button class="btn-primary btn-sm" data-product="C">Kaufen</button></div>
           </div>
         </div>
         <div class="card product-card">
-          <img src="/assets/images/placeholder.svg" alt="Placeholder">
-          <div class="meta"><strong>Optix Pack D</strong><span class="badge">Pro</span></div>
+          <div class="thumb"><img src="/assets/images/placeholder.svg" alt="Placeholder"></div>
+          <div class="meta"><div class="title">Optix Pack D</div><span class="badge">Pro</span></div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-            <div style="color:var(--color-muted-text)">€19.99</div>
-            <button class="btn" data-product="D">Kaufen</button>
+            <div class="price">€19.99</div>
+            <div class="quick-actions"><button class="btn-primary btn-sm" data-product="D">Kaufen</button></div>
           </div>
         </div>
         <div class="card product-card">
-          <img src="/assets/images/placeholder.svg" alt="Placeholder">
-          <div class="meta"><strong>Optix Pack E</strong><span class="badge">New</span></div>
+          <div class="thumb"><img src="/assets/images/placeholder.svg" alt="Placeholder"></div>
+          <div class="meta"><div class="title">Optix Pack E</div><span class="badge">New</span></div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-            <div style="color:var(--color-muted-text)">€7.99</div>
-            <button class="btn" data-product="E">Kaufen</button>
+            <div class="price">€7.99</div>
+            <div class="quick-actions"><button class="btn-primary btn-sm" data-product="E">Kaufen</button></div>
           </div>
         </div>
         <div class="card product-card">
-          <img src="/assets/images/placeholder.svg" alt="Placeholder">
-          <div class="meta"><strong>Optix Pack F</strong><span class="badge">Limited</span></div>
+          <div class="thumb"><img src="/assets/images/placeholder.svg" alt="Placeholder"></div>
+          <div class="meta"><div class="title">Optix Pack F</div><span class="badge">Limited</span></div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-            <div style="color:var(--color-muted-text)">€2.99</div>
-            <button class="btn" data-product="F">Kaufen</button>
+            <div class="price">€2.99</div>
+            <div class="quick-actions"><button class="btn-primary btn-sm" data-product="F">Kaufen</button></div>
           </div>
         </div>
       </div>
     </section>
 
-    <footer>
-      <div style="display:flex;justify-content:space-between;align-items:center;">
+    <footer class="site-footer">
+      <div class="cols">
         <div>© OptixTweak</div>
         <div>Impressum • Datenschutz • Kontakt</div>
+        <div>Social</div>
       </div>
     </footer>
   </div>
@@ -122,11 +133,9 @@
   <!-- Modal skeleton -->
   <div class="modal-backdrop" id="modal">
     <div class="modal card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <h3 id="modal-title">Kaufvorgang (Demo)</h3>
-      <p>Checkout flow wird simuliert. In Phase 7 werden Stripe/PayPal Platzhalter implementiert.</p>
-      <div style="display:flex;gap:8px;margin-top:16px">
-        <button class="btn" id="close">Schließen</button>
-      </div>
+      <div class="modal-header"><h3 id="modal-title">Kaufvorgang (Demo)</h3><button class="btn-ghost" id="close">✕</button></div>
+      <div class="modal-body"><p>Checkout flow wird simuliert. In Phase 7 werden Stripe/PayPal Platzhalter implementiert.</p></div>
+      <div class="modal-footer"><button class="btn-secondary" id="cancel">Abbrechen</button><button class="btn-primary">Weiter</button></div>
     </div>
   </div>
 
@@ -148,14 +157,13 @@
     })();
 
     // Modal demo
-    document.querySelectorAll('.btn[data-product]').forEach(btn=>{
+    document.querySelectorAll('.btn-primary[data-product]').forEach(btn=>{
       btn.addEventListener('click', ()=>{
         document.getElementById('modal').classList.add('show');
       });
     });
-    document.getElementById('close').addEventListener('click', ()=>{
-      document.getElementById('modal').classList.remove('show');
-    });
+    document.getElementById('close').addEventListener('click', ()=>{ document.getElementById('modal').classList.remove('show'); });
+    document.getElementById('cancel').addEventListener('click', ()=>{ document.getElementById('modal').classList.remove('show'); });
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') document.getElementById('modal').classList.remove('show'); });
   </script>
 </body>
