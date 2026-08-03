@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>OptixTweak — Home</title>
   <meta name="description" content="OptixTweak — Tools & Packs für moderne Grafik-Optimierung. Demo Site.">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="OptixTweak — Performance & Style Packs">
+  <meta property="og:description" content="Entdecke Demo‑Produkte mit modernen UI Packs, optimierten Assets und responsiven Layouts.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://OptixTweak.github.io/">
+  <meta property="og:image" content="/assets/images/placeholder-1200.webp">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="stylesheet" href="/src/styles/_variables.css">
   <link rel="stylesheet" href="/src/styles/components/header.css">
   <link rel="stylesheet" href="/src/styles/components/card.css">
@@ -31,6 +40,10 @@
         <div class="layer mid"></div>
         <div class="layer front"></div>
       </div>
+
+      <!-- Particles canvas (positioned with CSS in particles.js) -->
+      <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
       <h1>OptixTweak — Performance & Style Packs</h1>
       <p>Entdecke unsere Demo‑Produkte. Parallax Hero, Glassmorphism & lila Akzente.</p>
       <p><a class="btn-primary" href="products.html">Zu den Produkten</a></p>
@@ -59,5 +72,6 @@
   </main>
 
   <script src="/src/js/nav.js" defer></script>
+  <script src="/src/js/particles.js" defer></script>
 </body>
 </html>
