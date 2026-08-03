@@ -31,22 +31,43 @@
     window.location = '/demo/account/dashboard.html';
   }
 
+  // Helper: read meta tag content
+  function readMeta(name){
+    const m = document.querySelector(`meta[name="${name}"]`);
+    return m ? m.getAttribute('content') : null;
+  }
+
   // Stripe testmode handler (requires backend endpoint to create session)
   async function payWithStripe(){
-    const publishableKey = 'pk_test_YOUR_PUBLISHABLE_KEY'; // replace with your key in production
-    // This demo does not include server side keys. For Stripe Checkout you need a server endpoint that calls stripe.checkout.sessions.create
-    // Example flow (server): POST /create-checkout-session with cart items -> returns session.id
-    // Client: const stripe = Stripe(publishableKey); stripe.redirectToCheckout({ sessionId });
+    // publishable key can be provided via a meta tag: <meta name="stripe-pk" content="pk_test_...">
+    const publishableKey = readMeta('stripe-pk') || 'pk_test_YOUR_PUBLISHABLE_KEY';
+    // backend endpoint can be configured via meta tag: <meta name="stripe-backend" content="http://localhost:4242/create-checkout-session">
+    const backend = readMeta('stripe-backend') || '/create-checkout-session';
 
-    // We'll attempt to call /create-checkout-session relative to site. If absent, show instructions.
+    if (publishableKey === 'pk_test_YOUR_PUBLISHABLE_KEY') {
+      console.warn('Stripe publishable key not set in meta[name="stripe-pk"]. Using placeholder. Update the page to set your publishable key.');
+    }
+
+    if (typeof Stripe !== 'function') {
+      alert('Stripe.js not loaded. Please include <script src="https://js.stripe.com/v3/"></script> on the page.');
+      return;
+    }
+
     try{
       const cart = getCart(); if(cart.length===0) return alert('Cart empty');
-      const res = await fetch('/create-checkout-session', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ cart }) });
-      if(!res.ok) throw new Error('No backend endpoint found');
+
+      const res = await fetch(backend, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ cart }) });
+      if(!res.ok) throw new Error('Backend endpoint returned ' + res.status);
       const data = await res.json();
-      if(!data.sessionId) throw new Error('Invalid response');
+      if(!data.sessionId && !data.url) throw new Error('Invalid response from backend');
+
       const stripe = Stripe(publishableKey);
-      await stripe.redirectToCheckout({ sessionId: data.sessionId });
+      // Support both { sessionId } (redirectToCheckout) and { url } (direct redirect)
+      if (data.sessionId) {
+        await stripe.redirectToCheckout({ sessionId: data.sessionId });
+      } else if (data.url) {
+        window.location = data.url;
+      }
     }catch(err){
       alert('Stripe checkout not configured on this demo. See docs/checkout-notes.md for setup instructions.');
       console.warn(err);
