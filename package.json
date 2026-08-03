@@ -1,0 +1,25 @@
+{
+  "name": "optixtweak-demo",
+  "version": "1.0.0",
+  "description": "OptixTweak — statische Demo-Website mit serverlosen Phasen (GitHub Pages).",
+  "private": true,
+  "scripts": {
+    "lint": "eslint src/js js tools server test",
+    "test": "node --test \"test/*.test.js\"",
+    "start": "node server/server.js",
+    "sitemap": "node tools/generate-sitemap.js",
+    "check": "npm run lint && npm test"
+  },
+  "keywords": [
+    "optixtweak",
+    "demo",
+    "ecommerce",
+    "github-pages"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0"
+  }
+}

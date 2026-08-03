@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Optix Tweaks — Die nächste Generation von Performance Tweaks</title>
+  <meta name="description" content="Mehr FPS. Weniger Input Lag. Maximale Performance. Optix Tweaks bietet optimierte Tweaks für Gaming und Windows." />
+  <meta property="og:title" content="Optix Tweaks" />
+  <meta property="og:description" content="Die nächste Generation von Performance Tweaks — Mehr FPS. Weniger Input Lag. Maximale Performance." />
+  <meta property="og:type" content="website" />
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#8a5cff">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href="/assets/logo/favicon.svg">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="/" class="logo-link" aria-label="Optix Tweaks Home">
+        <img src="/assets/logo/logo-full.svg" alt="Optix Tweaks" class="logo-img">
+      </a>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <a href="./">Home</a>
+        <a href="./products/">Produkte</a>
+        <a href="./downloads/">Downloads</a>
+        <a href="./faq/">FAQ</a>
+        <a href="#" id="discord-btn">Discord</a>
+        <a href="./support/">Support</a>
+        <a href="./demo/checkout/cart.html">Warenkorb</a>
+        <a href="./login/" class="btn btn-outline">Login</a>
+      </nav>
+      <button class="nav-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Menü">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-canvas" id="hero-canvas" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <h1 class="hero-title">Die nächste Generation von Performance Tweaks</h1>
+        <p class="subtitle">Mehr FPS. Weniger Input Lag. Maximale Performance.</p>
+        <div class="hero-cta">
+          <a href="./products/" class="btn btn-primary">Produkte ansehen</a>
+          <a href="./demo/checkout/cart.html" class="btn btn-ghost">Jetzt kaufen</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="products-preview container">
+      <h2>Beliebte Produkte</h2>
+      <div class="product-grid" id="product-grid">
+        <!-- Produktkarten werden per JS aus Seed-Daten befüllt -->
+      </div>
+    </section>
+
+    <section class="info container">
+      <h2>Warum Optix Tweaks?</h2>
+      <p>Optimierungen für maximale FPS, reduzierte Eingabeverzögerung und stabile Performance. Entwickelt für Gamer und Performance-Enthusiasten.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Optix Tweaks</div>
+      <nav class="footer-nav" aria-label="Footer Navigation">
+        <a href="./faq/">FAQ</a>
+        <a href="https://github.com/OptixTweak/OptixTweak.github.io">GitHub</a>
+        <a href="./support/">Support</a>
+        <a href="./demo/public/impressum.html">Impressum</a>
+        <a href="./login/">Login</a>
+      </nav>
+    </div>
+  </footer>
+
+<script src="/js/seed.js" defer></script>
+  <script src="/src/js/escape.js" defer></script>
+  <script src="/src/js/cart.js" defer></script>
+  <script src="/src/js/toast.js" defer></script>
+  <script src="/src/js/particles.js" defer></script>
+  <script src="/src/js/register-sw.js" defer></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // simple nav toggle for mobile
+    (function(){
+      const btn = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('.main-nav');
+      btn.addEventListener('click', ()=>{
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        nav.classList.toggle('open');
+      });
+    })();
+
+    // Produkte aus /data/products.json rendern (eine zentrale Quelle)
+    (async function(){
+      const grid = document.getElementById('product-grid');
+      if(!grid) return;
+      const esc = (window.OptixEscape && window.OptixEscape.escapeHtml)
+        ? window.OptixEscape.escapeHtml
+        : function(s){ return String(s==null?'':s); };
+      try{
+        const res = await fetch('/data/products.json');
+        const products = await res.json();
+        grid.innerHTML = products.slice(0,6).map(p=>`
+          <article class="product-card">
+            <h3>${esc(p.name)}</h3>
+            <p class="text-muted">${esc(p.short)}</p>
+<div class="product-actions">
+              <a class="btn btn-primary" href="/demo/public/product.html?id=${encodeURIComponent(p.id)}">Details</a>
+              <button class="btn btn-ghost" type="button" data-add-cart="${p.id}">Kaufen — ${Number(p.price||0).toFixed(2)} €</button>
+            </div>
+          </article>
+        `).join('');
+        grid.querySelectorAll('[data-add-cart]').forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            if(!window.OptixCart) return alert('Warenkorb nicht verfügbar.');
+            const id = btn.getAttribute('data-add-cart');
+            const product = products.find(p=>p.id===id);
+            if(!product) return;
+            window.OptixCart.add(product);
+            if(window.showToast){
+              window.showToast({ message: product.name + ' wurde zum Warenkorb hinzugefügt',
+                actions:[{label:'Zum Warenkorb', callback:()=>{ window.location='/demo/checkout/cart.html'; }},{label:'Weiter einkaufen', callback:function(){}}],
+                duration:4000 });
+            } else { alert(product.name + ' wurde zum Warenkorb hinzugefügt.'); }
+          });
+        });
+      }catch(e){
+        grid.textContent = 'Produkte konnten nicht geladen werden.';
+      }
+    })();
+  </script>
+</body>
+</html>
