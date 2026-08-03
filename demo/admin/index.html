@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — OptixTweak Demo</title>
+  <link rel="stylesheet" href="/src/styles/_variables.css">
+  <link rel="stylesheet" href="/src/styles/components/forms.css">
+  <style>
+    .wrap{ max-width:980px; margin:24px auto; }
+    .grid{ display:grid; grid-template-columns:1fr 320px; gap:18px; align-items:start }
+    .panel{ background:var(--color-surface, #0f0f12); padding:14px; border-radius:10px; border:1px solid rgba(255,255,255,0.03) }
+    .actions{ display:flex; gap:8px; margin-top:10px }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Admin — OptixTweak</h1>
+    <div class="grid">
+      <div class="panel">
+        <h2>Login</h2>
+        <form id="admin-login">
+          <div class="field"><label for="token">Admin Token / Password</label><input id="token" class="input" placeholder="Enter demo token"></div>
+          <div style="margin-top:8px"><button id="login-btn">Login</button></div>
+        </form>
+
+        <hr style="margin:12px 0">
+        <h3>Or sign in with GitHub (placeholder)</h3>
+        <p>This will simulate a GitHub OAuth sign-in in the demo. For real OAuth you must configure a Client ID / redirect.</p>
+        <div class="actions"><button id="oauth-github" class="ghost">Sign in with GitHub (Demo)</button></div>
+
+        <p style="margin-top:12px"><a href="products.html">Open Products Editor</a></p>
+      </div>
+
+      <aside class="panel">
+        <h3>Admin Status</h3>
+        <div id="admin-status">Not signed in</div>
+        <div style="margin-top:8px"><button id="signout" class="ghost">Sign out</button></div>
+
+        <h4 style="margin-top:12px">Quick Actions</h4>
+        <div class="actions">
+          <a class="ghost" href="products.html">Products Editor</a>
+          <a class="ghost" href="upload.html">Upload Images</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="/src/js/admin-auth.js" defer></script>
+</body>
+</html>

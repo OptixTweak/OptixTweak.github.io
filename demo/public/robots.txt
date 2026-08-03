@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://OptixTweak.github.io/public/sitemap.xml

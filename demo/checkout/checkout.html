@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Checkout — OptixTweak Demo</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#8a5cff">
+  <link rel="stylesheet" href="/src/styles/_variables.css">
+  <link rel="stylesheet" href="/src/styles/components/card.css">
+  <link rel="stylesheet" href="/src/styles/components/buttons.css">
+  <style>
+    .summary{ display:flex; flex-direction:column; gap:12px; padding:18px; border-radius:18px; background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.08); }
+    .row{ display:flex; justify-content:space-between; gap:12px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.08); }
+    .checkout-card{ display:grid; gap:16px; grid-template-columns: 1.4fr 1fr; align-items:start; }
+    @media (max-width: 760px){ .checkout-card{ grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Checkout</h1>
+    <p style="color:var(--color-muted-text)">Diese Demo-Kasse simuliert den Bestellprozess und speichert Ihre Bestellung lokal.</p>
+    <div class="checkout-card">
+      <div id="summary" class="summary">Lade Warenkorb …</div>
+      <div class="summary">
+        <h2 style="margin:0">Schnell bestellen</h2>
+        <p style="margin:0; color:var(--color-muted-text)">Wählen Sie zwischen einer Demo-Bestellung oder einer Stripe-Test-Integration.</p>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:6px">
+          <button id="pay-sim" class="btn-primary">Demo-Bestellung abschließen</button>
+          <button id="pay-stripe" class="btn-secondary">Mit Stripe testen</button>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:18px"><a href="cart.html">Zurück zum Warenkorb</a></p>
+  </main>
+
+  <script src="https://js.stripe.com/v3/" defer></script>
+  <script src="/src/js/checkout.js" defer></script>
+  <script src="/src/js/register-sw.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1200" height="720" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <style>
+      .bg{fill:#0b0b0c}
+      .card{fill:#121214;stroke:#1e1e1f;stroke-width:1;border-radius:12px}
+      .muted{fill:#9a9aa3;font-family:Arial, Helvetica, sans-serif;font-size:14px}
+      .accent{fill:#8A42FF;font-family:Arial, Helvetica, sans-serif;font-size:20px;font-weight:700}
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="1200" height="720" rx="0"/>
+
+  <!-- Header -->
+  <rect x="40" y="24" width="220" height="44" rx="8" fill="#0" opacity="0" />
+  <text x="60" y="56" class="accent">OPTIX TWEAKS (Logo)</text>
+  <rect x="420" y="28" width="720" height="36" rx="8" fill="#0" opacity="0" />
+
+  <!-- Hero Panel -->
+  <rect x="40" y="100" width="720" height="420" rx="16" fill="#121214" stroke="#1c1c1d"/>
+  <text x="80" y="160" class="accent" font-size="40">Die nächste Generation von Performance Tweaks</text>
+  <text x="80" y="210" class="muted">Mehr FPS. Weniger Input Lag. Maximale Performance.</text>
+  <rect x="80" y="240" width="160" height="44" rx="10" fill="#8A42FF"/>
+  <text x="110" y="270" fill="#fff" font-size="14">Produkte ansehen</text>
+  <rect x="260" y="240" width="160" height="44" rx="10" fill="#222"/>
+  <text x="300" y="270" fill="#fff" font-size="14">Jetzt kaufen</text>
+
+  <!-- Right visual / mockup -->
+  <rect x="780" y="140" width="360" height="300" rx="12" fill="#0f0f10" stroke="#222"/>
+  <text x="820" y="180" class="muted">Animated Screenshot / Mockup</text>
+
+  <!-- Products Grid -->
+  <text x="40" y="560" class="accent" font-size="24">Beliebte Produkte</text>
+  <!-- three cards -->
+  <rect x="40" y="590" width="320" height="100" rx="10" fill="#121214" stroke="#1c1c1d"/>
+  <text x="60" y="620" fill="#8A42FF">Full Tweak</text>
+  <text x="60" y="640" class="muted">Komplette Optimierung für Windows · 30€</text>
+
+  <rect x="380" y="590" width="320" height="100" rx="10" fill="#121214" stroke="#1c1c1d"/>
+  <text x="400" y="620" fill="#8A42FF">FiveM Tweak</text>
+  <text x="400" y="640" class="muted">Optimiert FiveM für höchste Performance · 20€</text>
+
+  <rect x="720" y="590" width="320" height="100" rx="10" fill="#121214" stroke="#1c1c1d"/>
+  <text x="740" y="620" fill="#8A42FF">Premium Bundle</text>
+  <text x="740" y="640" class="muted">Enthält ALLE Produkte · 70€</text>
+
+  <!-- Footer -->
+  <rect x="40" y="710" width="1120" height="1" fill="#1a1a1a"/>
+  <text x="60" y="700" class="muted">Footer · Links: Discord · GitHub · Datenschutz · Impressum</text>
+</svg>

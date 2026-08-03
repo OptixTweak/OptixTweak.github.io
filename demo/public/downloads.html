@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Downloads — OptixTweak Demo</title>
+  <meta name="description" content="Deine Downloads & Lizenzen — OptixTweak Demo.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#8a5cff">
+  <link rel="stylesheet" href="/src/styles/_variables.css">
+  <link rel="stylesheet" href="/src/styles/components/buttons.css">
+  <link rel="stylesheet" href="/src/styles/components/header.css">
+  <link rel="stylesheet" href="/src/styles/components/footer.css">
+  <style>
+    .panel{ background:var(--color-surface); border:1px solid rgba(255,255,255,0.04); border-radius:12px; padding:18px; margin-bottom:14px }
+    code{ background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:6px }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div class="brand"><span class="logo">OptixTweak</span></div>
+      <nav class="site-nav nav" aria-hidden="true">
+        <a href="index.html">Home</a>
+        <a href="products.html">Produkte</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </header>
+
+    <h1>Downloads</h1>
+    <p style="color:var(--color-muted-text)">Hier findest du nach dem Kauf (Demo) deine freigeschalteten Downloads. Diese Demo ersetzt echte Downloads durch einen Hinweis + Lizenz-Key.</p>
+
+    <div id="download-root">
+      <div class="panel">Bitte <a href="/demo/account/login.html">anmelden</a>, um deine Downloads zu sehen.</div>
+    </div>
+
+    <p style="margin-top:18px"><a href="products.html">→ Zu den Produkten</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="cols">
+      <div>© OptixTweak</div>
+      <div><a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a></div>
+    </div>
+  </footer>
+
+<script src="/src/js/escape.js" defer></script>
+  <script src="/src/js/auth.js" defer></script>
+  <script src="/src/js/dashboard.js" defer></script>
+  <script src="/src/js/register-sw.js" defer></script>
+  <script>
+    // Redirect to the dedicated download section: dashboard.js füllt #downloads.
+    // Auf dieser Seite spiegeln wir die Lizenzen als Downloads (einfacher Re-Render).
+    (function(){
+      document.addEventListener('DOMContentLoaded', ()=>{
+        const esc = (window.OptixEscape && window.OptixEscape.escapeHtml) ? window.OptixEscape.escapeHtml : function(s){return String(s==null?'':s);};
+        const root = document.getElementById('download-root');
+        if(!root) return;
+        const session = (window.OptixAuth && window.OptixAuth.getSession) ? window.OptixAuth.getSession() : null;
+        if(!session){
+          root.innerHTML = '<div class="panel">Bitte <a href="/demo/account/login.html">anmelden</a>, um deine Downloads zu sehen.</div>';
+          return;
+        }
+        try{
+          const licenses = (JSON.parse(localStorage.getItem('optix:licenses') || '[]'))
+            .concat(JSON.parse(localStorage.getItem('optix-licenses') || '[]'))
+            .filter(l=>l.ownerEmail===session.email && l.status==='active');
+          if(licenses.length===0){
+            root.innerHTML = '<div class="panel">Noch keine Downloads verfügbar. <a href="products.html">Produkte ansehen</a>.</div>';
+            return;
+          }
+          root.innerHTML = licenses.map(l=>`
+            <div class="panel">
+              <strong>${esc(l.productId)}</strong>
+              <div class="small" style="margin-top:4px">Lizenz-Key: <code>${esc(l.key)}</code></div>
+              <div style="margin-top:10px">
+                <button class="btn-primary btn-sm download-btn" data-key="${esc(l.key)}">Download (Demo)</button>
+              </div>
+            </div>
+          `).join('');
+          root.querySelectorAll('.download-btn').forEach(btn=>{
+            btn.addEventListener('click', ()=>{
+              const key = btn.getAttribute('data-key') || '';
+              if(navigator.clipboard && key) navigator.clipboard.writeText(key).catch(()=>{});
+              if(window.showToast){
+                window.showToast({ message:'Download freigeschaltet (Demo). Lizenz-Key kopiert.', duration:4000 });
+              } else {
+                alert('Download freigeschaltet (Demo). Lizenz-Key: ' + key);
+              }
+            });
+          });
+        }catch(e){ root.innerHTML = '<div class="panel">Fehler beim Laden der Downloads.</div>'; }
+      });
+    })();
+  </script>
+</body>
+</html>
+

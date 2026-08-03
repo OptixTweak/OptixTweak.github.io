@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OptixTweak — Produkt</title>
+  <meta name="description" content="Produktdetail Demo">
+
+  <!-- Open Graph placeholders (updated dynamically) -->
+  <meta property="og:title" content="OptixTweak Produkt">
+  <meta property="og:description" content="Produktdetails">
+  <meta property="og:type" content="product">
+  <meta property="og:url" content="https://OptixTweak.github.io/public/product.html">
+<meta property="og:image" content="/assets/images/placeholder-1200.webp">
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#8a5cff">
+  <link rel="stylesheet" href="/src/styles/_variables.css">
+  <link rel="stylesheet" href="/src/styles/components/card.css">
+  <link rel="stylesheet" href="/src/styles/components/buttons.css">
+  <style>
+    .tabs{ display:flex; gap:12px; margin-top:12px; }
+    .tab{ padding:8px 12px; border-radius:8px; background:transparent; border:1px solid rgba(255,255,255,0.03); cursor:pointer }
+    .tab[aria-selected="true"]{ background:linear-gradient(180deg,var(--color-accent),var(--color-accent-600)); color:#fff }
+    .tab-panel{ margin-top:16px }
+    .screenshots img{ max-width:100%; height:auto; border-radius:8px }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div class="brand"><span class="logo">OptixTweak</span></div>
+      <nav class="site-nav nav" aria-hidden="true">
+        <a href="index.html">Home</a>
+        <a href="products.html">Produkte</a>
+      </nav>
+    </header>
+
+    <article id="product-article">
+      <div id="product-root">Lade Produkt…</div>
+    </article>
+
+    <footer class="site-footer"><div class="cols"><div>© OptixTweak</div></div></footer>
+  </main>
+
+  <script src="/src/js/nav.js" defer></script>
+  <script src="/src/js/product-tabs.js" defer></script>
+  <script src="/src/js/register-sw.js" defer></script>
+  <script>
+    // Simple renderer: reads ?id=... and renders product content
+    (async function(){
+// XSS-Schutz (Fallback, falls escape.js nicht eingebunden)
+      function esc(s){
+        if(typeof window.OptixEscape !== 'undefined' && window.OptixEscape.escapeHtml) return window.OptixEscape.escapeHtml(s);
+        var amp = String.fromCharCode(38) + 'amp;';
+        var lt  = String.fromCharCode(38) + 'lt;';
+        var gt  = String.fromCharCode(38) + 'gt;';
+        var quot= String.fromCharCode(38) + 'quot;';
+        var apos= String.fromCharCode(38) + '#39;';
+        return String(s==null?'':s).replace(/[&<>"']/g, function(c){
+          if(c==='&') return amp; if(c==='<') return lt; if(c==='>') return gt; if(c==='"') return quot; return apos;
+        });
+      }
+
+      const params = new URLSearchParams(location.search);
+      const id = params.get('id');
+      const root = document.getElementById('product-root');
+      const res = await fetch('/data/products.json');
+      const json = await res.json();
+      const product = json.find(p=>p.id===id) || json[0];
+
+      function setMeta(key, value){
+        let el = document.querySelector(`meta[property="${key}"]`);
+        if(!el){ el = document.createElement('meta'); el.setAttribute('property', key); document.head.appendChild(el); }
+        el.setAttribute('content', value);
+      }
+
+      // Update Open Graph meta dynamically for better sharing
+      setMeta('og:title', product.name);
+      setMeta('og:description', product.short);
+      setMeta('og:image', product.images && product.images[0] ? (product.images[0] + '-1200.webp') : '/assets/images/placeholder-1200.webp');
+      // Update document title
+      document.title = `${product.name} — OptixTweak`;
+
+      // JSON-LD structured data
+      const ld = {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": product.name,
+        "sku": product.sku,
+        "image": product.images.map(i=>i+'-1200.webp'),
+        "description": product.description,
+        "offers": { "@type": "Offer", "priceCurrency": "EUR", "price": product.price },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": product.rating, "reviewCount": product.reviews }
+      };
+      const script = document.createElement('script'); script.type='application/ld+json'; script.textContent = JSON.stringify(ld); document.head.appendChild(script);
+
+      const imgSrc = (product.images && product.images[0]) ? product.images[0] + '-1200.webp' : '/assets/images/placeholder-1200.webp';
+
+      root.innerHTML = `
+        <div class="card">
+          <div style="display:flex;gap:16px;flex-wrap:wrap">
+            <div style="flex:1 1 320px"><img src="${esc(imgSrc)}" alt="${esc(product.name)}" style="width:100%;border-radius:8px" loading="lazy"></div>
+            <div style="flex:2 1 360px">
+              <h1>${esc(product.name)}</h1>
+              <p style="color:var(--color-muted-text)">${esc(product.short)}</p>
+              <div style="margin-top:12px"><strong style="color:var(--color-accent)">€${Number(product.price||0).toFixed(2)}</strong></div>
+              <div style="margin-top:16px"><button class="btn-primary">Kaufen</button></div>
+            </div>
+          </div>
+
+          <div class="tabs" role="tablist" aria-label="Produkt Tabs">
+            <button role="tab" class="tab" id="tab-desc" aria-controls="panel-desc" aria-selected="true">Beschreibung</button>
+            <button role="tab" class="tab" id="tab-feat" aria-controls="panel-feat" aria-selected="false">Features</button>
+            <button role="tab" class="tab" id="tab-screens" aria-controls="panel-screens" aria-selected="false">Screenshots</button>
+            <button role="tab" class="tab" id="tab-faq" aria-controls="panel-faq" aria-selected="false">FAQ</button>
+            <button role="tab" class="tab" id="tab-req" aria-controls="panel-req" aria-selected="false">System</button>
+          </div>
+
+          <div id="panel-desc" class="tab-panel" role="tabpanel">${esc(product.description)}</div>
+          <div id="panel-feat" class="tab-panel" role="tabpanel" hidden>${(product.features||[]).map(f=>`<li>${esc(f)}</li>`).join('')}</div>
+          <div id="panel-screens" class="tab-panel screenshots" role="tabpanel" hidden>${(product.screenshots||[]).map(s=>`<img src="${esc(s)}-768.webp" loading="lazy">`).join('')}</div>
+          <div id="panel-faq" class="tab-panel" role="tabpanel" hidden>${(product.faq||[]).map(q=>`<details><summary>${esc(q.q)}</summary><p>${esc(q.a)}</p></details>`).join('')}</div>
+          <div id="panel-req" class="tab-panel" role="tabpanel" hidden>${(product.system||[]).map(x=>esc(x)).join('<br>')}</div>
+        </div>
+      `;
+    })();
+  </script>
+</body>
+</html>

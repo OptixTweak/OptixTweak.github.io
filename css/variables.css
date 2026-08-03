@@ -1,0 +1,26 @@
+/* variables.css — Design tokens derived from the Optix Tweaks logo */
+:root{
+  --color-bg: #0b0b0c; /* deep black background */
+  --color-surface: #121214; /* cards, panels */
+  --color-muted: #9a9aa3;
+  --color-text: #e8e8ee;
+
+  --accent-500: #8A42FF; /* primary accent from logo */
+  --accent-600: #6B2BFF;
+  --accent-400: #B85BFF;
+
+  --gradient-accent: linear-gradient(90deg,var(--accent-500),var(--accent-600));
+
+  --glass: rgba(255,255,255,0.03);
+  --glass-strong: rgba(255,255,255,0.06);
+
+  /* shadows */
+  --shadow-soft: 0 8px 30px rgba(11,10,12,0.6);
+
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 6px;
+
+  --transition-fast: 180ms cubic-bezier(.2,.8,.2,1);
+  --transition-medium: 360ms cubic-bezier(.2,.8,.2,1);
+}

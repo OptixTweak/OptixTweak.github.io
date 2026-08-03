@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FAQ — OptixTweak</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#8a5cff">
+  <link rel="stylesheet" href="/src/styles/_variables.css">
+  <style>
+    details{ background:var(--color-surface); padding:12px; border-radius:8px; margin-bottom:8px }
+    summary{ cursor:pointer; font-weight:600 }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header class="header"><div class="brand"><span class="logo">OptixTweak</span></div></header>
+
+    <h1>FAQ</h1>
+    <section id="faqs">
+      <!-- 20 FAQ items -->
+      <details><summary>1. Was ist OptixTweak?</summary><p>OptixTweak ist eine Demo‑Site für UI/Asset Packs.</p></details>
+      <details><summary>2. Wie lade ich ein Produkt herunter?</summary><p>Nachdem Kauf (simuliert) erscheint der Download‑Button in deinem Dashboard.</p></details>
+      <details><summary>3. Welche Dateiformate werden genutzt?</summary><p>SVG für Icons, WebP für Rasterbilder.</p></details>
+      <details><summary>4. Sind Preise in Euro?</summary><p>Ja, Demo‑Preise sind in EUR.</p></details>
+      <details><summary>5. Welche Lizenzarten gibt es?</summary><p>Demo unterstützt einfache Lizenz Keys (Client‑seitig gespeichert).</p></details>
+      <details><summary>6. Wie funktioniert die Registrierung?</summary><p>Client‑seitiger Demo‑Flow (Phase 4) speichert Accounts in LocalStorage.</p></details>
+      <details><summary>7. Wie sicher sind Passwörter?</summary><p>Demo nutzt Web Crypto‑Hashing. Für Produktion serverseitig ersetzen.</p></details>
+      <details><summary>8. Unterstützt ihr Rückerstattungen?</summary><p>Dies ist eine Demo: kein Zahlungs‑Backend implementiert.</p></details>
+      <details><summary>9. Kann ich Webhooks konfigurieren?</summary><p>Ja, Admin UI bietet Platzhalter für Webhooks (Phase 6/8).</p></details>
+      <details><summary>10. Gibt es Discord Integration?</summary><p>Discord OAuth placeholders werden bereitgestellt (Phase 8).</p></details>
+      <details><summary>11. Wie optimiere ich Bilder?</summary><p>Siehe style‑guide für CLI Befehle (svgo, cwebp).</p></details>
+      <details><summary>12. Welche Browser werden unterstützt?</summary><p>Moderne Chromium, Firefox, Safari (aktuelle Versionen).</p></details>
+      <details><summary>13. Wie teste ich Lighthouse?</summary><p>Lokales Lighthouse oder Lighthouse CI; Ziel Mobile ≥70 Desktop ≥85.</p></details>
+      <details><summary>14. Werden Cookies verwendet?</summary><p>Demo speichert Sessions in LocalStorage (Simulation).</p></details>
+      <details><summary>15. Kann ich das Repository klonen?</summary><p>Ja — Anleitungen in README werden ergänzt.</p></details>
+      <details><summary>16. Wie kann ich Produkte hinzufügen?</summary><p>Admin‑Panel (Phase 6) bietet UI zum Erstellen von Produkten.</p></details>
+      <details><summary>17. Gibt es Barrierefreiheitstests?</summary><p>Phase 9 enthält axe‑core Checks; Ziel AA.</p></details>
+      <details><summary>18. Wie sind die Systemanforderungen?</summary><p>Die Produktseite enthält Beispielanforderungen pro Produkt.</p></details>
+      <details><summary>19. Funktioniert die Site offline?</summary><p>Keine Offline‑Cache Implementierung in der Demo.</p></details>
+      <details><summary>20. Wie kontaktiere ich Support?</summary><p>Kontakt Hinweise im Impressum/Datenschutz Seiten.</p></details>
+    </section>
+
+<footer class="site-footer"><div class="cols"><div>© OptixTweak</div></div></footer>
+  </main>
+  <script src="/src/js/register-sw.js" defer></script>
+</body>
+</html>

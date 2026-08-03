@@ -1,0 +1,166 @@
+[
+  {
+    "id": "full_tweak",
+    "name": "Full Tweak",
+    "short": "Komplette Windows-Optimierung",
+    "description": "Die umfassende Optimierung für Windows. Beinhaltet FPS-, Registry-, Netzwerk-, Timer-, Input-, CPU- und RAM-Tweaks. Für maximale Leistung und reduzierte Eingabeverzögerung.",
+    "sku": "OPT-001",
+    "price": 30,
+    "category": "tweak",
+    "images": ["/assets/images/placeholder"],
+    "screenshots": ["/assets/images/placeholder"],
+    "features": ["FPS Optimierung", "Registry Tweaks", "Netzwerk & Timer", "Input-Optimierung", "CPU & RAM"],
+    "system": ["Windows 10+", "4GB RAM"],
+    "rating": 4.8,
+    "reviews": 42,
+    "faq": [
+      { "q": "Für welche Windows-Version ist der Full Tweak geeignet?", "a": "Windows 10 und Windows 11 werden unterstützt." },
+      { "q": "Kann ich den Tweak rückgängig machen?", "a": "Ja, ein Restore-Skript wird mitgeliefert." }
+    ]
+  },
+  {
+    "id": "fortnite_tweak",
+    "name": "Fortnite Tweak",
+    "short": "Maximale FPS & weniger Delay",
+    "description": "Speziell für Fortnite optimiert: maximale FPS und reduzierte Eingabeverzögerung. Inklusive Config-Optimierung für stabile Bildraten.",
+    "sku": "OPT-002",
+    "price": 20,
+    "category": "tweak",
+    "images": ["/assets/images/placeholder"],
+    "screenshots": ["/assets/images/placeholder"],
+    "features": ["FPS Boost", "Input Delay Reduktion", "Config Optimierung"],
+    "system": ["Windows 10+", "4GB RAM"],
+    "rating": 4.6,
+    "reviews": 28,
+    "faq": [
+      { "q": "Bringt der Tweak einen FPS-Boost?", "a": "Ja, je nach System sind deutliche FPS-Verbesserungen möglich." }
+    ]
+  },
+  {
+    "id": "fivem_tweak",
+    "name": "FiveM Tweak",
+    "short": "Höchste Performance für FiveM",
+    "description": "Optimiert FiveM für höchste Performance: FPS-Verbesserungen, Netzwerk-Feintuning und stabile Serververbindung.",
+    "sku": "OPT-003",
+    "price": 20,
+    "category": "tweak",
+    "images": ["/assets/images/placeholder"],
+    "screenshots": ["/assets/images/placeholder"],
+    "features": ["FPS Boost", "Netzwerk-Tuning", "Stabilität"],
+    "system": ["Windows 10+", "8GB RAM"],
+    "rating": 4.5,
+    "reviews": 19,
+    "faq": [
+      { "q": "Funktioniert der Tweak mit allen FiveM-Servern?", "a": "Ja, die Optimierung ist serverunabhängig." }
+    ]
+  },
+  {
+    "id": "wasd_tweak",
+    "name": "WASD Tweak",
+    "short": "Bessere Tastatur-Reaktionszeit",
+    "description": "Verbessert die Tastatur-Reaktionszeit und reduziert die Eingabeverzögerung bei WASD-Bewegungen.",
+    "sku": "OPT-004",
+    "price": 15,
+    "category": "tweak",
+    "images": ["/assets/images/placeholder"],
+    "screenshots": ["/assets/images/placeholder"],
+    "features": ["Input Optimierung", "Keyboard Response", "Polling Rate"],
+    "system": ["Windows 8+", "4GB RAM"],
+    "rating": 4.3,
+    "reviews": 15,
+    "faq": [
+      { "q": "Muss ich spezielle Hardware haben?", "a": "Nein, der Tweak funktioniert mit jeder Standard-Tastatur." }
+    ]
+  },
+  {
+    "id": "hitreg_tweak",
+    "name": "HitReg Tweak",
+    "short": "Verbesserte Hit Registration",
+    "description": "Verbessert die Hit Registration für präziseres Gameplay. Ideal für kompetitive Shooter.",
+    "sku": "OPT-005",
+    "price": 15,
+    "category": "tweak",
+    "images": ["/assets/images/placeholder"],
+    "screenshots": ["/assets/images/placeholder"],
+    "features": ["HitReg Optimierung", "Netzwerk-Tuning", "Packet Prioritization"],
+    "system": ["Windows 10+", "4GB RAM"],
+    "rating": 4.2,
+    "reviews": 12,
+    "faq": [
+      { "q": "Was bewirkt HitReg genau?", "a": "Die Einstellungen optimieren Netzwerkpakete für präzisere Treffererkennung." }
+    ]
+  },
+  {
+    "id": "fps_tweak",
+    "name": "FPS Tweak",
+    "short": "Maximale FPS Optimierung",
+    "description": "Maximale FPS-Optimierung für Windows und Spiele. Leistungsstarke Einstellungen für mehr Bildraten.",
+    "sku": "OPT-006",
+    "price": 15,
+    "category": "tweak",
+    "images": ["/assets/images/placeholder"],
+    "screenshots": ["/assets/images/placeholder"],
+    "features": ["FPS Boost", "GPU Optimierung", "Power Settings"],
+    "system": ["Windows 10+", "4GB RAM"],
+    "rating": 4.4,
+    "reviews": 21,
+    "faq": [
+      { "q": "Wie viel mehr FPS sind möglich?", "a": "Das hängt stark vom System ab; viele Nutzer berichten von 10–30% mehr FPS." }
+    ]
+  },
+  {
+    "id": "windows_tweak",
+    "name": "Windows Tweak",
+    "short": "Windows komplett optimieren",
+    "description": "Die komplette Windows-Optimierung: Deaktivierung von Bloatware, Dienste-Tuning und Systemeinstellungen für maximale Performance.",
+    "sku": "OPT-007",
+    "price": 15,
+    "category": "tweak",
+    "images": ["/assets/images/placeholder"],
+    "screenshots": ["/assets/images/placeholder"],
+    "features": ["Bloatware Entfernung", "Dienste-Tuning", "Systemsettings"],
+    "system": ["Windows 10+", "4GB RAM"],
+    "rating": 4.1,
+    "reviews": 17,
+    "faq": [
+      { "q": "Ist der Tweak sicher?", "a": "Ja, alle Änderungen sind dokumentiert und mit Restore-Punkt versehen." }
+    ]
+  },
+  {
+    "id": "fivem_pack",
+    "name": "FiveM Tweak Pack",
+    "short": "Alle FiveM-Tweaks im Bundle",
+    "description": "Das Komplettpaket für FiveM: Enthält FiveM Tweak, HitReg Tweak, FPS Tweak und WASD Tweak zum Sparpreis.",
+    "sku": "OPT-008",
+    "price": 50,
+    "category": "bundle",
+    "images": ["/assets/images/placeholder"],
+    "screenshots": ["/assets/images/placeholder"],
+    "features": ["FiveM Tweak", "HitReg Tweak", "FPS Tweak", "WASD Tweak"],
+    "system": ["Windows 10+", "8GB RAM"],
+    "rating": 4.7,
+    "reviews": 31,
+    "faq": [
+      { "q": "Was ist im Pack enthalten?", "a": "Alle vier FiveM-bezogenen Tweaks in einem Paket." }
+    ]
+  },
+  {
+    "id": "premium_bundle",
+    "name": "Premium Bundle",
+    "short": "ALLE Produkte im Bundle",
+    "description": "Das Premium Bundle enthält ALLE Optix Tweaks Produkte. Maximale Performance für jede Anforderung.",
+    "sku": "OPT-009",
+    "price": 70,
+    "category": "bundle",
+    "images": ["/assets/images/placeholder"],
+    "screenshots": ["/assets/images/placeholder"],
+    "features": ["Full Tweak", "Fortnite Tweak", "FiveM Tweak", "WASD Tweak", "HitReg Tweak", "FPS Tweak", "Windows Tweak"],
+    "system": ["Windows 10+", "8GB RAM"],
+    "rating": 4.9,
+    "reviews": 55,
+    "faq": [
+      { "q": "Enthält das Bundle alle Produkte?", "a": "Ja, alle Optix Tweaks Produkte sind enthalten." }
+    ]
+  }
+]
+

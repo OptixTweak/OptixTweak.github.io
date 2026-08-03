@@ -1,0 +1,23 @@
+{
+  "site": "OptixTweak.github.io",
+  "generated": "2026-08-02T00:00:00Z",
+  "routes": [
+    { "path": "/", "title": "Home", "priority": 1.0 },
+    { "path": "/products/", "title": "Produkte", "priority": 0.9 },
+    { "path": "/products/{id}.html", "title": "Produkt-Detail", "priority": 0.9 },
+    { "path": "/downloads/", "title": "Downloads", "auth": true, "priority": 0.8 },
+    { "path": "/login/", "title": "Login / Registrierung", "priority": 0.5 },
+    { "path": "/dashboard/", "title": "Benutzer Dashboard", "auth": true, "priority": 0.8 },
+    { "path": "/dashboard/overview", "title": "Übersicht", "auth": true },
+    { "path": "/dashboard/products", "title": "Meine Produkte", "auth": true },
+    { "path": "/dashboard/licenses", "title": "Meine Lizenzen", "auth": true },
+    { "path": "/dashboard/downloads", "title": "Meine Downloads", "auth": true },
+    { "path": "/dashboard/settings", "title": "Account Einstellungen", "auth": true },
+    { "path": "/admin/", "title": "Admin Panel", "auth": true, "role": ["owner","admin"] },
+    { "path": "/faq/", "title": "FAQ", "priority": 0.6 },
+    { "path": "/support/", "title": "Support", "priority": 0.6 },
+    { "path": "/privacy/", "title": "Datenschutz", "priority": 0.2 },
+    { "path": "/impressum/", "title": "Impressum", "priority": 0.2 },
+    { "path": "/404.html", "title": "404", "priority": 0.1 }
+  ]
+}

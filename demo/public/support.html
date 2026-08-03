@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Support — OptixTweak Demo</title>
+<meta name="description" content="Kontakt & Support für OptixTweak — Demo.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#8a5cff">
+  <link rel="stylesheet" href="/src/styles/_variables.css">
+  <link rel="stylesheet" href="/src/styles/components/buttons.css">
+  <link rel="stylesheet" href="/src/styles/components/forms.css">
+  <link rel="stylesheet" href="/src/styles/components/header.css">
+  <link rel="stylesheet" href="/src/styles/components/footer.css">
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div class="brand"><span class="logo">OptixTweak</span></div>
+      <nav class="site-nav nav" aria-hidden="true">
+        <a href="index.html">Home</a>
+        <a href="products.html">Produkte</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </header>
+
+    <h1>Support</h1>
+    <p style="color:var(--color-muted-text)">Hast du Fragen zu einem Produkt, deiner Lizenz oder einer Bestellung? Schreib uns — im Demo-Modus wird nur eine Bestätigung angezeigt.</p>
+
+    <div style="max-width:560px">
+      <form id="support-form" aria-label="Support-Kontakt">
+        <div class="field" style="margin-bottom:12px">
+          <label for="s-name">Name</label>
+          <input id="s-name" class="input" name="name" required placeholder="Dein Name">
+        </div>
+        <div class="field" style="margin-bottom:12px">
+          <label for="s-email">E-Mail</label>
+          <input id="s-email" class="input" name="email" type="email" required placeholder="du@example.com">
+        </div>
+        <div class="field" style="margin-bottom:12px">
+          <label for="s-category">Kategorie</label>
+          <select id="s-category" class="input" name="category">
+            <option value="allgemein">Allgemein</option>
+            <option value="bestellung">Bestellung / Zahlung</option>
+            <option value="lizenz">Lizenz / Key</option>
+            <option value="download">Download</option>
+          </select>
+        </div>
+        <div class="field" style="margin-bottom:12px">
+          <label for="s-message">Nachricht</label>
+          <textarea id="s-message" class="input" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Senden (Demo)</button>
+      </form>
+    </div>
+
+    <p style="margin-top:18px"><a href="faq.html">→ Häufige Fragen (FAQ)</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="cols">
+      <div>© OptixTweak</div>
+      <div><a href="impressum.html">Impressum</a> • <a href="datenschutz.html">Datenschutz</a></div>
+    </div>
+  </footer>
+
+  <script src="/src/js/escape.js" defer></script>
+  <script src="/src/js/register-sw.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const form = document.getElementById('support-form');
+      if(!form) return;
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const esc = window.OptixEscape ? window.OptixEscape.escapeHtml : function(s){return String(s==null?'':s);};
+        const name = esc(form.querySelector('#s-name').value.trim());
+        const msg = 'Vielen Dank, ' + name + '! Deine Anfrage wurde im Demo-Modus empfangen.';
+        if(window.showToast){ window.showToast({ message: msg, duration: 4000 }); }
+        else { alert(msg); }
+        form.reset();
+      });
+    });
+  </script>
+</body>
+</html>
+

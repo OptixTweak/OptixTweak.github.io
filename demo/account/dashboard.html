@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard — OptixTweak Demo</title>
+  <link rel="stylesheet" href="/src/styles/_variables.css">
+  <link rel="stylesheet" href="/src/styles/components/cards.css">
+  <style>
+    .orders, .licenses, .downloads{ display:flex; flex-direction:column; gap:12px }
+    .order, .license, .download-item{ background:var(--color-surface); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.03) }
+    .download-item{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><h1>Mein Dashboard</h1><div id="user-email" class="small"></div></header>
+
+    <section>
+      <h2>Bestellungen</h2>
+      <div id="orders" class="orders">Keine Bestellungen.</div>
+    </section>
+
+    <section style="margin-top:18px">
+      <h2>Meine Lizenzen</h2>
+      <div id="licenses" class="licenses">Keine Lizenzen in der Demo.</div>
+    </section>
+
+    <section style="margin-top:18px">
+      <h2>Downloads</h2>
+      <div id="downloads" class="downloads">Keine Downloads in der Demo.</div>
+    </section>
+
+    <p style="margin-top:18px"><a href="/demo/public/index.html">Zurück zur Startseite</a> · <a href="/demo/public/products.html">Weitere Produkte</a></p>
+  </main>
+
+  <script src="/src/js/escape.js" defer></script>
+  <script src="/src/js/auth.js" defer></script>
+  <script src="/src/js/toast.js" defer></script>
+  <script src="/src/js/dashboard.js" defer></script>
+</body>
+</html>

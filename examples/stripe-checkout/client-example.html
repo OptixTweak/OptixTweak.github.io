@@ -1,0 +1,36 @@
+<!-- Minimal client example for demo: posts cart (localStorage format) to server and redirects -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Demo Stripe Checkout Client</title>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <button id="buy">Kaufen (Demo)</button>
+  <script>
+    // Reads optix-cart from localStorage and posts to example server
+    document.getElementById('buy').addEventListener('click', async () => {
+      const cart = JSON.parse(localStorage.getItem('optix-cart') || '[]');
+      if (!cart || cart.length === 0) return alert('Warenkorb ist leer');
+
+      try {
+        const res = await fetch('http://localhost:4242/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cart, customerEmail: 'demo@optix.test' })
+        });
+        if (!res.ok) throw new Error('Server error');
+        const data = await res.json();
+        if (!data.sessionId) throw new Error('Invalid response');
+        const stripe = Stripe('pk_test_YOUR_PUBLISHABLE_KEY'); // replace with your publishable key
+        await stripe.redirectToCheckout({ sessionId: data.sessionId });
+      } catch (err) {
+        alert('Stripe checkout not configured on this demo. See docs/checkout-notes.md for setup.');
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

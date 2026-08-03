@@ -1,0 +1,155 @@
+// server/prisma/schema.prisma
+// Phase 1 (Fundament): Datenmodell-Vorbereitung für PostgreSQL.
+//
+// Diese Modelle bilden 1:1 ab, was heute schon in data/licenses.json und
+// data/products.json steckt, plus die minimalen Felder für Bestellungen und
+// ein Audit-Log. HWID-Bindung, Geräteverwaltung, Aktivierungszähler etc.
+// (Aufgabe 1 der Gesamtanforderung) kommen bewusst erst in Phase 2 dazu, um
+// dieses Schema hier schrittweise und ohne Blindflug zu erweitern.
+//
+// Setup:
+//   cd server
+//   npm install
+//   cp .env.example .env   # DATABASE_URL eintragen, DB_DRIVER=postgres setzen
+//   npm run db:migrate     # führt prisma migrate dev aus
+//   npm run db:generate    # erzeugt den Prisma Client
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Registrierter Benutzer (Käufer). Entspricht künftig dem, was heute im
+/// Browser über src/js/auth.js (localStorage-Demo) verwaltet wird.
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  passwordHash String?
+  displayName  String?
+  role         Role      @default(CUSTOMER)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  licenses     License[]
+  orders       Order[]
+  auditLogs    AuditLog[]
+
+  @@map("users")
+}
+
+enum Role {
+  CUSTOMER
+  SUPPORT
+  MODERATOR
+  ADMIN
+  OWNER
+}
+
+/// Produkt-Katalog. Entspricht data/products.json, dort bleibt die JSON-Datei
+/// vorerst die von der statischen Seite genutzte Quelle (Fallback), Postgres
+/// wird primär vom Server für preisliche Validierung & Lizenzerzeugung genutzt.
+model Product {
+  id          String    @id // z.B. "full_tweak" - identisch zu data/products.json:id
+  sku         String    @unique
+  name        String
+  short       String?
+  description String?
+  price       Decimal   @db.Decimal(10, 2)
+  category    String?
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  licenses    License[]
+  orderItems  OrderItem[]
+
+  @@map("products")
+}
+
+/// Bestellung (aktuell primär via Stripe Checkout Session befüllt).
+model Order {
+  id         String      @id // Stripe Session-ID oder interne Order-ID
+  userId     String?
+  email      String
+  status     OrderStatus @default(PENDING)
+  provider   String      @default("stripe") // stripe | paypal | ... (Phase "Zahlungen erweitern")
+  createdAt  DateTime    @default(now())
+
+  user       User?       @relation(fields: [userId], references: [id])
+  items      OrderItem[]
+  licenses   License[]
+
+  @@map("orders")
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int      @default(1)
+  unitPrice Decimal  @db.Decimal(10, 2)
+
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+/// Lizenz. 1:1-Nachbildung der bisherigen JSON-Struktur aus
+/// server/lib/licenses.js, plus optionale Verknüpfung zu User/Order.
+/// hwid/activationCount/expiresAt sind bereits vorgesehen, werden aber erst
+/// in Phase 2 ("echtes Lizenzsystem") mit Logik befüllt.
+model License {
+  id          String        @id @default(uuid())
+  key         String        @unique
+  productId   String
+  userId      String?
+  orderId     String?
+  ownerEmail  String
+  status      LicenseStatus @default(ACTIVE)
+  hwid        String?       // Phase 2: HWID-Bindung
+  createdAt   DateTime      @default(now())
+  expiresAt   DateTime?
+  activatedAt DateTime?
+
+  product     Product       @relation(fields: [productId], references: [id])
+  user        User?         @relation(fields: [userId], references: [id])
+  order       Order?        @relation(fields: [orderId], references: [id])
+
+  @@map("licenses")
+  @@index([ownerEmail])
+}
+
+enum LicenseStatus {
+  UNUSED
+  ACTIVE
+  EXPIRED
+  REVOKED
+  LIFETIME
+}
+
+/// Einfaches Audit-Log für sicherheitsrelevante Aktionen (Login, Lizenz-Änderungen,
+/// Admin-Aktionen). Wird in der Sicherheits-Phase weiter ausgebaut.
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  action    String
+  detail    String?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}
