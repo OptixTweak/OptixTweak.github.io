@@ -1,0 +1,50 @@
+[
+  {
+    "id":"pack-a",
+    "name":"Optix Pack A",
+    "short":"UI Pack mit modernen Elementen",
+    "description":"Optix Pack A enthält UI Komponenten, Icons und Assets im modernen Stil.",
+    "sku":"OPA-001",
+    "price":9.99,
+    "category":"ui",
+    "images":["/assets/images/placeholder"],
+    "screenshots":["/assets/images/placeholder"],
+    "features":["Glassmorphism components","Responsive layouts","Optimized assets"],
+    "system":["Windows 10+","macOS 10.15+","4GB RAM"],
+    "rating":4.5,
+    "reviews":12,
+    "faq":[{"q":"Ist das Paket kommerziell nutzbar?","a":"Demo Lizenz only."}]
+  },
+  {
+    "id":"pack-b",
+    "name":"Optix Pack B",
+    "short":"Icon Set & UI shaders",
+    "description":"Icon Set mit lila Akzentfarben und mehreren Formaten.",
+    "sku":"OPB-002",
+    "price":4.99,
+    "category":"icons",
+    "images":["/assets/images/placeholder"],
+    "screenshots":["/assets/images/placeholder"],
+    "features":["SVG sprite","Multiple sizes"],
+    "system":["Windows 8+","macOS 10.12+"],
+    "rating":4.2,
+    "reviews":8,
+    "faq":[{"q":"Enthält das Set SVG?","a":"Ja, SVG und PNG Export."}]
+  },
+  {
+    "id":"pack-c",
+    "name":"Optix Pack C",
+    "short":"Pro UI Kit",
+    "description":"Vollständiges Pro UI Kit mit Komponenten und templates.",
+    "sku":"OPC-003",
+    "price":14.99,
+    "category":"ui",
+    "images":["/assets/images/placeholder"],
+    "screenshots":["/assets/images/placeholder"],
+    "features":["Premium components","Animations guide"],
+    "system":["Windows 10+","macOS 11+","8GB RAM"],
+    "rating":4.8,
+    "reviews":34,
+    "faq":[{"q":"Gibt es Updates?","a":"Ja, per Lizenz erhältlich."}]
+  }
+]
