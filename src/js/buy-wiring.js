@@ -1,8 +1,6 @@
-// buy-wiring.js
+// buy-wiring.js (updated)
 // Attach "add to cart" behavior to product pages and buttons.
-// Works in two modes:
-// - product page with ?id=PRODUCT_ID -> fetches /data/products.json and wires the main "Kaufen" button
-// - buttons with data-product="product-id" -> fetches product by id and adds to cart
+// Now shows a small accessible toast confirmation with actions instead of immediate redirect.
 
 (function(){
   async function fetchProducts(){
@@ -19,6 +17,29 @@
   }
 
   function goToCart(){ window.location = '/demo/checkout/cart.html'; }
+  function continueShopping(){ /* no-op: user stays on page */ }
+
+  async function addAndNotify(prod){
+    const item = { id: prod.id, name: prod.name, price: Number(prod.price), image: (prod.images && prod.images[0]) ? (prod.images[0]+'-480.webp') : '/assets/images/placeholder.svg' };
+    if(window.OptixCart && typeof window.OptixCart.add === 'function'){
+      window.OptixCart.add(item);
+      if(window.showToast){
+        window.showToast({
+          message: `${prod.name} wurde zum Warenkorb hinzugefügt`,
+          actions: [
+            { label: 'Zum Warenkorb', callback: goToCart },
+            { label: 'Weiter einkaufen', callback: continueShopping }
+          ],
+          duration: 5000
+        });
+      } else {
+        // fallback: simple alert + redirect option
+        if(confirm(prod.name + ' wurde zum Warenkorb hinzugefügt. Zum Warenkorb?')) goToCart();
+      }
+    }else{
+      alert('Cart not available');
+    }
+  }
 
   async function wireProductPage(){
     const params = new URLSearchParams(location.search);
@@ -30,14 +51,7 @@
       e.preventDefault();
       const prod = await findProductById(id);
       if(!prod){ alert('Produkt nicht gefunden'); return; }
-      // use minimal product shape expected by OptixCart
-      const item = { id: prod.id, name: prod.name, price: Number(prod.price), image: (prod.images && prod.images[0]) ? (prod.images[0]+'-480.webp') : '/assets/images/placeholder.svg' };
-      if(window.OptixCart && typeof window.OptixCart.add === 'function'){
-        window.OptixCart.add(item);
-        goToCart();
-      }else{
-        alert('Cart not available');
-      }
+      addAndNotify(prod);
     });
   }
 
@@ -51,13 +65,7 @@
         const id = btn.getAttribute('data-product');
         const prod = products.find(p=>p.id===id);
         if(!prod){ alert('Produkt nicht gefunden'); return; }
-        const item = { id: prod.id, name: prod.name, price: Number(prod.price), image: (prod.images && prod.images[0]) ? (prod.images[0]+'-480.webp') : '/assets/images/placeholder.svg' };
-        if(window.OptixCart && typeof window.OptixCart.add === 'function'){
-          window.OptixCart.add(item);
-          goToCart();
-        }else{
-          alert('Cart not available');
-        }
+        addAndNotify(prod);
       });
     });
   }
