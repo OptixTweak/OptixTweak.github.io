@@ -21,8 +21,17 @@ const PORT = process.env.PORT || 4242;
  { cart: [{ id, name, price, qty, image? }], customerEmail? }
  - price: number in Euros (e.g. 19.99)
  - qty: integer
- Response: { sessionId: '<stripe_session_id>' }
+ Response: { sessionId: '<stripe_session_id>' } or { url: '<checkout_url>' }
 */
+
+// Optional server-side mapping from your product IDs to Stripe Price IDs.
+// Populate this mapping with the price_xxx IDs you create in the Stripe Dashboard.
+// Example:
+// const PRICE_MAP = { 'demo-1': 'price_1NExa2Abc...', 'demo-2': 'price_1NEyB3Xyz...' };
+const PRICE_MAP = {
+  // 'demo-1': process.env.PRICE_DEMO_1 || 'price_abc123',
+};
+
 app.post('/create-checkout-session', async (req, res) => {
   try {
     const { cart = [], customerEmail } = req.body;
@@ -31,8 +40,17 @@ app.post('/create-checkout-session', async (req, res) => {
       return res.status(400).json({ error: 'Cart is empty or invalid' });
     }
 
-    // Build Stripe line_items from your cart format
+    // Build Stripe line_items from your cart format. Prefer server-side Price IDs when available.
     const line_items = cart.map(item => {
+      const qty = Math.max(1, parseInt(item.qty || 1, 10));
+      const priceId = PRICE_MAP[item.id];
+
+      if (priceId) {
+        // Use an existing Stripe Price ID (recommended for production)
+        return { price: priceId, quantity: qty };
+      }
+
+      // Fallback: build price_data from client-supplied unit price (use only for demos / tests)
       const unit_amount = Math.round((Number(item.price) || 0) * 100); // cents
       return {
         price_data: {
@@ -44,7 +62,7 @@ app.post('/create-checkout-session', async (req, res) => {
           },
           unit_amount,
         },
-        quantity: Math.max(1, parseInt(item.qty || 1, 10)),
+        quantity: qty,
       };
     });
 
@@ -58,7 +76,8 @@ app.post('/create-checkout-session', async (req, res) => {
     });
 
     // Return what checkout.js expects: { sessionId }
-    res.json({ sessionId: session.id });
+    // Note: in some Stripe setups you might prefer to return session.url instead; checkout.js supports both.
+    res.json({ sessionId: session.id, url: session.url });
   } catch (err) {
     console.error('create-checkout-session error', err);
     res.status(500).json({ error: err.message });
