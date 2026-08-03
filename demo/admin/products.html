@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — Products Editor</title>
+  <link rel="stylesheet" href="/src/styles/_variables.css">
+  <link rel="stylesheet" href="/src/styles/components/forms.css">
+  <link rel="stylesheet" href="/src/styles/components/card.css">
+  <style>
+    .wrap{ max-width:1100px; margin:18px auto; display:grid; grid-template-columns: 1fr 380px; gap:18px}
+    .list{ display:flex; flex-direction:column; gap:10px }
+    .item{ padding:10px; border-radius:8px; background:var(--color-surface); display:flex; justify-content:space-between; align-items:center }
+    .editor{ padding:12px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); }
+    .actions{ display:flex; gap:8px; margin-top:8px }
+    textarea{ width:100%; min-height:120px }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section>
+      <header style="display:flex;justify-content:space-between;align-items:center"><h1>Products</h1><div><button id="refresh" class="ghost">Reload from repo</button> <button id="new" class="btn-primary">New Product</button></div></header>
+      <div class="list" id="product-list">Loading...</div>
+      <div style="margin-top:12px">
+        <button id="save-local" class="btn-primary">Save draft (Local)</button>
+        <button id="export-json" class="ghost">Export JSON</button>
+        <button id="create-pr" class="ghost">Create PR (server required)</button>
+      </div>
+    </section>
+
+    <aside class="editor" id="editor">
+      <h2>Editor</h2>
+      <div id="editor-content">Wähle ein Produkt, um zu bearbeiten.</div>
+    </aside>
+  </main>
+
+  <script src="/src/js/admin-auth.js" defer></script>
+  <script src="/src/js/admin-products.js" defer></script>
+</body>
+</html>
